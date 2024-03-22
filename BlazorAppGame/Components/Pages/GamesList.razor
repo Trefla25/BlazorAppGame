@@ -1,0 +1,32 @@
+﻿@page "/gameslist"
+@rendermode InteractiveServer
+
+<h3>Games List</h3>
+
+<ul>
+    @foreach (var game in games)
+    {
+        <li>@game.Title</li>
+    }
+</ul>
+
+<input @bind="newGame" />
+<button>Add game</button>
+
+
+@code {
+    private List<GamesItem> games = new();
+    string newGame = "";
+
+    void AddGame()
+    {
+        if (!string.IsNullOrWhiteSpace(newGame))
+        {
+            games.Add(new GamesItem { Title = newGame });
+            newGame = string.Empty;
+        }
+    }
+}
+
+
+
