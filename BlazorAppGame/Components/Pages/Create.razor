@@ -1,0 +1,75 @@
+﻿@page "/create"
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h5>Name</h5>
+<input @bind="Name" />
+<button class="btn btn-primary" @onclick="AddName">Confirm</button>
+
+<h5>ReleaseDate</h5>
+<input @bind="ReleaseDate" />
+<button class="btn btn-primary" @onclick="AddDate">Confirm</button>
+
+<h5>Genre</h5>
+<input @bind="Genre" />
+<button class="btn btn-primary" @onclick="AddGenre">Confirm</button>
+
+<h5>Price</h5>
+<input @bind="Price" />
+<button class="btn btn-primary" @onclick="AddPrice">Confirm</button>
+
+<h5>Rating</h5>
+<input @bind="Rating" />
+<button class="btn btn-primary" @onclick="AddRating">Confirm</button>
+
+<p>
+    <a asp-page=<button class="btn btn-primary" @onclick="AddGame">Finish</button>
+</a>
+</p>
+
+@code {
+    private List<GamesItem> games = new();
+    GamesItem createGame = new GamesItem();
+    string Name = "";
+    string ReleaseDate;
+    string Genre = "";
+    float Price;
+    string Rating = "";
+
+    void AddName()
+    {
+        createGame.Title = Name;
+    }
+    void AddDate()
+    {
+        createGame.ReleaseDate = ReleaseDate;
+    }
+    void AddGenre()
+    {
+        createGame.Genre = Genre;
+    }
+    void AddPrice()
+    {
+        createGame.Price = Price;
+    }
+    void AddRating()
+    {
+        createGame.Rating = Rating;
+    }
+    void AddGame()
+    {
+        games.Add(createGame);
+        createGame.Title = "";
+        createGame.ReleaseDate ="";
+        createGame.Genre = "";
+        createGame.Price = 0;
+        createGame.Rating = "";
+        NavigationManager.NavigateTo("GamesList");
+    }
+
+    
+
+}
+
