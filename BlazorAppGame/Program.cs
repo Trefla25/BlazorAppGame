@@ -1,3 +1,4 @@
+using BlazorAppGame;
 using BlazorAppGame.Components;
 using MudBlazor.Services;
 
@@ -7,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMudServices();
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+
+ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
@@ -29,3 +30,10 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+static void ConfigureServices(IServiceCollection services)
+{
+    services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+    services.AddSingleton<GamesServices>();
+}

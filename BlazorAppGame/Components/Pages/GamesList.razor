@@ -1,12 +1,14 @@
 ﻿@page "/gameslist"
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
+@inject GamesServices gamesServices
 
 <h3>Games List (@games.Count)</h3>
 
 <p>
-    <a asp-page=<button class="btn btn-primary" @onclick="NavigateToCounterComponent">Create new</button>
-</a>
+    <a asp-page=
+        <button class="btn btn-primary" @onclick="@(() => { NavigateToCounterComponent(); AddGame(); })">Create new</button>
+    </a>
 </p>
 
 
@@ -43,6 +45,13 @@
     }
 
     private List<GamesItem> games = new();
+
+    private void AddGame()
+    {
+        gamesServices.AddGame(new GamesItem());
+    }
+
+
 }
 
 
